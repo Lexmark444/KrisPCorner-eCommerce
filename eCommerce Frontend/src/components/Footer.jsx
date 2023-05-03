@@ -5,6 +5,10 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import logoimage from '../assets/images/Krisp Corner.png';
+import RoomIcon from '@mui/icons-material/Room';
+import PhoneIcon from '@mui/icons-material/Phone';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import payimage from '../assets/images/payment.png'
 
 
 const Container = styled.div`
@@ -16,9 +20,10 @@ const Left = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
+    justify-content: flex-start;
 `
 const Logo = styled.h1`
-    width: 300px;
+    width: 40%;
 `
 const Image = styled.img`
     width: 100%;
@@ -64,6 +69,16 @@ const ListItem = styled.li`
 `
 const Right = styled.div`
     flex: 1;
+    padding: 20px;
+`
+const ContactItem = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+`
+const Payment = styled.img`
+    width: 35%;
+
 `
 
 
@@ -71,9 +86,14 @@ const Footer = () => {
   return (
     <Container>
         <Left>
-            <Logo><Image src ={logoimage} alt="none"></Image></Logo>
+            <Logo><Image src ={logoimage} ></Image></Logo>
             <Desc>A site developed by KrisP using MongoDB, ExpressJS, React,
-                 and NodeJS along with Stripe API to process payments</Desc>
+                 and NodeJS along with Stripe API to process payments.
+            </Desc>
+            <Desc>
+            Public Service Warning: You will actually be charged
+                 for the items, but will not recieve them phyiscally. Feel free to donate :D
+            </Desc>
             <SocialContainer>
                 <IconContainer color="E4405F">
                     <InstagramIcon />
@@ -109,7 +129,21 @@ const Footer = () => {
                 <ListItem>Dev Favorites</ListItem>
             </List>
         </Center>
-        <Right></Right>     
+        <Right>
+            <Title>Contact</Title>
+            <ContactItem>
+                <RoomIcon style={{marginRight:"10px"}}/> 555 Crunchy Street, New Jersey, 13337 
+            </ContactItem>
+            <ContactItem>
+                <PhoneIcon style={{marginRight:"10px"}}/> (732)-555-5555 
+            </ContactItem>
+            <ContactItem>
+                <MailOutlineIcon style={{marginRight:"10px"}}/> Krishna.Patel1207@gmail.com 
+            </ContactItem>
+            <ContactItem>
+            <Payment src={payimage} />
+            </ContactItem>
+        </Right>     
     </Container>
   )
 }
