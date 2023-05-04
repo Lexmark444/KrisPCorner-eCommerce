@@ -92,7 +92,7 @@ const Footer = () => {
             </Desc>
             <Desc>
             Public Service Warning: You will actually be charged
-                 for the items, but will not recieve them phyiscally. Feel free to donate :D
+                 for the items, but will not recieve them phyiscally. Feel free to donate 🙃
             </Desc>
             <SocialContainer>
                 <IconContainer color="E4405F">
