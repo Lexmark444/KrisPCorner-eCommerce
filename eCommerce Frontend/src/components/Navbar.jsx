@@ -4,17 +4,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import logoimage from '../assets/images/Krisp Corner.png'
+import {mobile} from "../responsive"
 
 
 
 const Container = styled.div`
     height: 60 px;
+    ${mobile({ height: "40px" })}
 `
 const Wrapper = styled.div`
     padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    ${mobile({ padding: "5px 0px" })}
 `
 
 const Left = styled.div`
@@ -25,6 +28,7 @@ const Left = styled.div`
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
+    ${mobile({ display: "none" })}
 `
 const SearchContainer = styled.div`
     border: 1px solid lightgray;
@@ -33,9 +37,11 @@ const SearchContainer = styled.div`
     margin-left: 25px;
     padding: 5px;
     border-radius: 3px;
+    ${mobile({ marginLeft: "10px" })}
 `
 const Input = styled.input`
     border: none;
+    ${mobile({ width: "50px" })}
 `
 
 const Center = styled.div`
@@ -48,12 +54,12 @@ const Center = styled.div`
 const Logo = styled.h1`
     font-weight: bold;
     height: 100%;
-
 `
 const Image = styled.img`
     display: flex;
     align-items: center;
     justify-content: center;
+    ${mobile({ width: "150px" })}
 `
 
 const Right = styled.div`
@@ -61,12 +67,14 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    ${mobile({ flex: "2", justifyContent: "center" })}
 `
 
 const MenuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
     margin-left: 25px;
+    ${mobile({ fontSize: "9px", marginLeft: "10px" })}
 `
 
 const Navbar = () => {

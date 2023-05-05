@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { mobile } from "../responsive"
 
 const Container = styled.div`
   flex: 1;
@@ -9,12 +10,14 @@ const Container = styled.div`
   &:hover{
         transform: scale(1.03)
     }
+    ${mobile({ margin: "0" })}
 `
 const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 3px;
+  ${mobile({ height: "55vh" })}
 `
 const Info = styled.div`
   position: absolute;
