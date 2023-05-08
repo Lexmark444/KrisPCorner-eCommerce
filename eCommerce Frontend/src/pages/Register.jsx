@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import registerbg from "../assets/images/registerbg.jpg"
+import { mobile } from "../responsive"
 
 const Container = styled.div`
   height: 100vh;
@@ -22,6 +23,7 @@ const Wrapper = styled.div`
   padding: 20px;
   background-color: white;
   opacity: 90%;
+  ${mobile({ width: "75%" })}
 `
 
 const Title = styled.h1`

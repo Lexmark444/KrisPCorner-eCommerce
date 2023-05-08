@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import loginbackground from "../assets/images/loginbackground.jpg"
+import { mobile } from "../responsive"
 
 const Container = styled.div`
   height: 100vh;
@@ -15,6 +16,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+ 
 `
 
 const Wrapper = styled.div`
@@ -23,6 +25,7 @@ const Wrapper = styled.div`
   background-color: white;
   opacity: 90%;
   border-radius: 3px;
+  ${mobile({ width: "75%" })}
 `
 
 const Title = styled.h1`

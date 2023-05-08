@@ -5,6 +5,7 @@ import Footer from "../components/Footer"
 import placeholder from "../assets/images/placeholder.png"
 import coffee from "../assets/images/coffee.jpg"
 import { Add, Remove } from "@mui/icons-material"
+import { mobile } from "../responsive"
 
 const Container = styled.div`
 
@@ -12,6 +13,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
     padding: 20px;
+    ${mobile({ padding: "10px" })}
 `
 
 const Title = styled.h1`
@@ -43,11 +45,13 @@ const TopText = styled.span`
     text-decoration: underline;
     cursor: pointer;
     margin: 0px 10px;
+    ${mobile({ display: "none" })}
 `
 
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
+    ${mobile({ flexDirection: "column" })}
 
 `
 const Info = styled.div`
@@ -73,6 +77,8 @@ const Image = styled.img`
     &:hover{
         transform: translateX(100px) scale(1.7);   
     }
+
+    ${mobile({ objectFit: "contain" })}
 `
 
 const Details = styled.div`
@@ -110,10 +116,12 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.div`
     margin: 5px;
     font-size: 24px;
+    ${mobile({ margin: "5px 15px" })}
 `
 const ProductPrice = styled.div`
     font-size: 30px;
     font-weight: 200;
+    ${mobile({ fontSize: "24px", fontWeight: "500" })}
 `
 
 const Hr = styled.hr`
@@ -129,6 +137,7 @@ const Summary = styled.div`
     border-radius: 3px;
     padding: 20px 20px 35px;
     height: 50vh;
+    ${mobile({ borderRadius: "10px", marginTop: "10px" })}
 `
 const SummaryTitle = styled.h1`
     font-weight: 200;
