@@ -16,16 +16,17 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 //routes
+app.use(cors());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
-app.use(cors());
+
 
 app.get('/', (req, res) => {
-    res.send('Hello NODE API')
+    res.send('Node REST API is running... Feel free to launch the front end now!')
 })
 
 

@@ -6,6 +6,10 @@ import Footer from "../components/Footer"
 import placeholderimg from "../assets/images/placeholder.png"
 import { Add, Remove } from "@mui/icons-material"
 import { mobile } from "../responsive"
+import { useLocation } from "react-router"
+import { useEffect, useState  } from "react"
+import { publicRequest } from "../requestMethods"
+
 
 
 const Container = styled.div`
@@ -119,43 +123,67 @@ const Button = styled.button`
 `
 
 const Product = () => {
+    const location = useLocation();
+    const id = (location.pathname.split("/")[2])
+    const [product, setProduct] = useState({})
+    const [quantity, setQuantity] = useState(1)
+    const [size, setSize] = useState(null)
+
+
+    useEffect(()=>{
+        const getProduct = async ()=>{
+            try {
+                const res = await publicRequest.get("/products/find/"+ id )
+                setProduct(res.data);
+            } catch (error) {
+                
+            }
+        }
+    },[id])
+
+    const handleQuantity = (type) =>{
+        if(type === "decr"){
+           quantity > 1 && setQuantity(quantity - 1)
+        } else {
+            setQuantity(quantity + 1)
+        }
+    }
+
+    const handleClick = ()=>{
+        // update cart
+        
+    }
   return (
     <Container>
         <Navbar />
         <Announcement />
         <Wrapper>
             <ImgContainer>
-                <Image src={placeholderimg} />
+                <Image src={product.img} />
             </ImgContainer>
             <InfoContainer>
-                <Title>Chocolate Chip Cookies</Title>
+                <Title>{product.title}</Title>
                 <Desc>
-                    Indulge in the warm, buttery goodness of our freshly baked chocolate chip cookies!
-                    Made with the finest ingredients, each bite is packed with mouth-watering chunks of rich, 
-                    velvety chocolate that melt in your mouth. The perfect balance of crispy edges and soft, 
-                    chewy centers make these cookies the ultimate comfort treat. Baked to perfection, 
-                    our chocolate chip cookies are perfect for any occasion - whether it's a mid-day 
-                    snack or a sweet treat after dinner. One bite and you'll be transported to 
-                    chocolate heaven!
+                    {product.desc}
                 </Desc>
                 <Price>$ 20</Price>
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Size</FilterTitle>
-                        <FilterSize>
-                            <FilterSizeOption>Snack</FilterSizeOption>
-                            <FilterSizeOption>Regular</FilterSizeOption>
-                            <FilterSizeOption>Party</FilterSizeOption>
+                        <FilterSize onChange={(e)=> setSize(e.target.value)}>
+                            {product.size?.map((s) => (
+                            <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                            ))}
                         </FilterSize>
                     </Filter>
                 </FilterContainer>
                 <AddContainer>
                     <AmountContainer>
-                        <Remove />
-                        <Amount>1</Amount>
-                        <Add />
+                        <Remove onClick={()=> handleQuantity("decr")}/>
+                        <Amount>{quantity}</Amount>
+                        <Add onClick={()=> handleQuantity("incr")}/>
                     </AmountContainer>
-                    <Button>ADD TO CART</Button>
+                    <Button onClick={handleClick}>ADD TO CART</Button>
 
                 </AddContainer>
             </InfoContainer>

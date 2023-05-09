@@ -50,6 +50,7 @@ const ProductList = () => {
   const handleFilters = (e) =>{
     const value = e.target.value;
     setFilters({
+      ...filters,
       [e.target.name]: value,
     })
   };
@@ -60,12 +61,12 @@ const ProductList = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Product List</Title>
+      <Title>Product Catalog</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="type" onChange={handleFilters}>
-            <Option disabled >Category</Option>
+            <Option disabled>Category</Option>
             <Option>Cereal</Option>
             <Option>Chips</Option>
             <Option>Cookies</Option>
