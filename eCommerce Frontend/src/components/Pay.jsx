@@ -2,13 +2,13 @@ import StripeCheckout from 'react-stripe-checkout'
 import logoimg from '../assets/images/Krisp Corner.png'
 import { useState, useEffect } from 'react'
 import axios from "axios"
-import useNavigate from 'react-router-dom'
+// import useNavigate from 'react-router-dom'
 
 const KEY = "pk_live_51MQyO2GwDtnQAKqyBJaPfjnovUNErplOOMVPZcUzvDjGhA9i2f7Gk62naJRYEKy3VvRNbAlzdF6Dxlhd3192dj1e00i4EjV0c0"
 
 const Pay = () => {
     const [stripeToken, setStripeToken] = useState(null);
-    const history = useNavigate()
+    // const history = useNavigate()
     const onToken = (token) =>{
         setStripeToken(token)
     };
@@ -22,13 +22,15 @@ const Pay = () => {
                 }
                 )
                 console.log(res.data);
-                history.push("/success")
+                // history.push("/success")
             } catch (error) {
                 console.log(error)
             }
         }
         stripeToken && makeRequest()
-    },[stripeToken, history])
+    },[stripeToken, 
+        // history
+    ])
 
     return (
         <div
@@ -66,4 +68,4 @@ const Pay = () => {
     )
 }
 
-export default Pay;
+export default Pay

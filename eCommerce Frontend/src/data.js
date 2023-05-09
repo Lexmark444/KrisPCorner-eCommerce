@@ -41,26 +41,31 @@ export const categories = [
         id: 1,
         img: desserts,
         title: "Dessert",
+        cat: "dessert"
     },
     {
         id: 2,
         img: chips,
         title: "Chips",
+        cat: "chips"
     },
     {
         id: 3,
         img: cookies,
         title: "Cookies",
+        cat: "cookies"
     },
     {
         id: 4,
         img: cereal,
         title: "Cereal",
+        cat: "cereal"
     },
     {
         id: 5,
         img: drinks,
         title: "Drinks",
+        cat: "drinks"
     },
 ]
 

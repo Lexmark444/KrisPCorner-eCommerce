@@ -68,7 +68,7 @@ const ProductDetail = styled.div`
 `
 
 const Image = styled.img`
-    object-fit: cover;
+    object-fit: contain;
     height: 200px;
     width: 150px;
     border-radius: 3px;
@@ -77,8 +77,6 @@ const Image = styled.img`
     &:hover{
         transform: translateX(100px) scale(1.7);   
     }
-
-    ${mobile({ objectFit: "contain" })}
 `
 
 const Details = styled.div`

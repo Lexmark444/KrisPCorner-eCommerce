@@ -2,6 +2,7 @@ import styled from "styled-components"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { Link } from "react-router-dom";
 
 const Info = styled.div`
     opacity: 0;
@@ -52,6 +53,7 @@ const Pacman = styled.div`
 const Image = styled.img`
     height: 40%;
     z-index: 2;
+    object-fit: contain;
 `
 
 const Icon = styled.div`
@@ -78,6 +80,7 @@ const Product = ({item}) => {
     <Container>
         <Pacman />
         <Image src={item.img} />
+        <Link to={`/product/${item.id}`}>
         <Info>
             <Icon>
               <ShoppingCartOutlinedIcon/>
@@ -89,6 +92,7 @@ const Product = ({item}) => {
                 <FavoriteBorderOutlinedIcon />
             </Icon>
         </Info>
+        </Link>
     </Container>
   )
 }
