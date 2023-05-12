@@ -34,7 +34,7 @@ const Products = ({cat, filters, sort}) => {
       products.filter(item=> Object.entries(filters).every(([key,value])=>
         item[key].includes(value)
       ))
-    )
+    ) 
   },[products, cat, filters])
 
   useEffect(()=>{

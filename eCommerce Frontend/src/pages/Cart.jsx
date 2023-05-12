@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react'
 import { userRequest } from "../requestMethods"
 import { useNavigate } from "react-router"
 
-const KEY = process.env.STRIPE_APP_KEY
+const stripe = process.env.REACT_APP_STRIPE_KEY
 
 const Container = styled.div`
 
@@ -191,7 +191,7 @@ const Cart = () => {
     useEffect(()=>{
         const makeRequest = async () =>{
             try {
-                const res = await userRequest("/checkout/payment",
+                const res = await userRequest.post("/checkout/payment",
                 {
                     tokenId: stripeToken,
                     amount: cart.total * 100,
@@ -275,7 +275,7 @@ const Cart = () => {
             description={`Your total is $${cart.total}`}
             amount={cart.total*100}
             token={onToken}
-            stripeKey={KEY}
+            stripeKey={stripe}
             >
             <Button>CHECKOUT NOW</Button>
             </StripeCheckout>
