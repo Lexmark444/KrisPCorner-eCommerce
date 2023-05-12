@@ -3,9 +3,15 @@ import Navbar from "../components/Navbar"
 import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
 import placeholder from "../assets/images/placeholder.png"
-import coffee from "../assets/images/coffee.jpg"
 import { Add, Remove } from "@mui/icons-material"
 import { mobile } from "../responsive"
+import { useSelector } from "react-redux"
+import StripeCheckout from 'react-stripe-checkout'
+import { useState, useEffect } from 'react'
+import { userRequest } from "../requestMethods"
+import { useNavigate } from "react-router"
+
+const KEY = process.env.STRIPE_APP_KEY
 
 const Container = styled.div`
 
@@ -157,7 +163,7 @@ const SummaryItemPrice = styled.span`
 
 `
 
-const Button = styled.button`
+const Button = styled.div`
     width: 100%;
     padding: 13px;
     background-color: black;
@@ -165,6 +171,8 @@ const Button = styled.button`
     font-weight: 600;
     border-radius: 3px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 
 `
 
@@ -172,6 +180,30 @@ const Button = styled.button`
 
 
 const Cart = () => {
+    const cart = useSelector((state) => state.cart);
+    const [stripeToken, setStripeToken] = useState(null);
+    const history = useNavigate()
+
+    const onToken = (token) =>{
+        setStripeToken(token)
+    };
+
+    useEffect(()=>{
+        const makeRequest = async () =>{
+            try {
+                const res = await userRequest("/checkout/payment",
+                {
+                    tokenId: stripeToken,
+                    amount: cart.total * 100,
+                })
+                history.push("/success", {data:res.data})
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        makeRequest()
+    },[stripeToken, cart.total, history])
+
   return (
     <Container>
         <Navbar />
@@ -194,49 +226,34 @@ const Cart = () => {
             <Bottom>
 
                 <Info>
+                    {cart.products.map(product=>(
                     <Product>
                         <ProductDetail>
-                            <Image src={placeholder} />
+                            <Image src={product.img} />
                             <Details>
-                                <ProductName><b>Product:</b> Chocolate Chip Cookies</ProductName>
-                                <ProductId><b>ID:</b> 8978635468</ProductId>
-                                <ProductSize><b>Size:</b> Snack</ProductSize>
+                                <ProductName><b>Product:</b> {product.title}</ProductName>
+                                <ProductId><b>ID:</b> {product._id}</ProductId>
+                                <ProductSize><b>Size:</b> {product.size}</ProductSize>
                             </Details>
                         </ProductDetail>
                         <PriceDetail>
                             <ProductAmountContainer>
                                 <Remove />
-                                <ProductAmount>2</ProductAmount>
+                                <ProductAmount>{product.quantity}</ProductAmount>
                                 <Add />
                             </ProductAmountContainer>
-                            <ProductPrice>$ 30</ProductPrice>
+                            <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
                         </PriceDetail>
                     </Product>
+                    ))}
                     <Hr></Hr>
-                    <Product>
-                        <ProductDetail>
-                            <Image src={coffee} />
-                            <Details>
-                                <ProductName><b>Product:</b> Iced Coffee with Milk and Sugar</ProductName>
-                                <ProductId><b>ID:</b> 681641554</ProductId>
-                                <ProductSize><b>Size:</b> Regular</ProductSize>
-                            </Details>
-                        </ProductDetail>
-                        <PriceDetail>
-                            <ProductAmountContainer>
-                                <Remove />
-                                <ProductAmount>1</ProductAmount>
-                                <Add />
-                            </ProductAmountContainer>
-                            <ProductPrice>$ 9</ProductPrice>
-                        </PriceDetail>
-                    </Product>
                 </Info>
+
                 <Summary>
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                     <SummaryItem>
                         <SummaryItemText>Subtotal</SummaryItemText>
-                        <SummaryItemPrice>$39.00</SummaryItemPrice>
+                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -248,9 +265,20 @@ const Cart = () => {
                     </SummaryItem>
                     <SummaryItem type="total">
                         <SummaryItemText>Total</SummaryItemText>
-                        <SummaryItemPrice>$39.00</SummaryItemPrice>
+                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                     </SummaryItem>
-                    <Button>CHECKOUT NOW</Button>
+                    <StripeCheckout 
+            name='KrisP Corner' 
+            image={placeholder}
+            billingAddress
+            shippingAddress
+            description={`Your total is $${cart.total}`}
+            amount={cart.total*100}
+            token={onToken}
+            stripeKey={KEY}
+            >
+            <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
                 </Summary>
             </Bottom>
         </Wrapper>
