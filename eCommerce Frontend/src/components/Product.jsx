@@ -80,7 +80,7 @@ const Product = ({item}) => {
     <Container>
         <Pacman />
         <Image src={item.img} />
-        <Link to={`/product/${item.id}`}>
+        <Link to={`/product/${item._id}`}>
         <Info>
             <Icon>
               <ShoppingCartOutlinedIcon/>
