@@ -215,7 +215,7 @@ const Cart = () => {
                 <TopButton>CONTINUE SHOPPING</TopButton>
                 <TopTextContainer>
                     <TopText>
-                        Shopping Bag (2)    
+                        Shopping Bag ({cart.quantity})    
                     </TopText>
                     <TopText>
                         Your Wishlist (0)
