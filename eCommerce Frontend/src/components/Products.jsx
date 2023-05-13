@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { popularProducts } from "../data"
 import Product from "./Product"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -20,7 +19,7 @@ const Products = ({cat, filters, sort}) => {
   useEffect(()=>{
     const getProducts = async ()=>{
       try {
-        const res = await axios.get(cat ? `http://localhost:5000/api/products?category=${cat}` : `http://localhost:5000/api/products`)
+        const res = await axios.get(cat ? `http://localhost:5000/api/products/?category=${cat}` : `http://localhost:5000/api/products`)
         setProducts(res.data)
       } catch (error) {
         
@@ -31,8 +30,8 @@ const Products = ({cat, filters, sort}) => {
 
   useEffect(()=>{
     cat && setFilteredProducts(
-      products.filter(item=> Object.entries(filters).every(([key,value])=>
-        item[key].includes(value)
+      products.filter(item=> Object.entries(filters).every(([key, value])=>
+        item[key] === value
       ))
     ) 
   },[products, cat, filters])
@@ -57,7 +56,7 @@ const Products = ({cat, filters, sort}) => {
     <Container>
       {cat 
       ? filteredProducts.map((item)=> <Product item={item} key={item.id} />) 
-      : filteredProducts.slice(0, 8)
+      : products.slice(0, 8)
       .map((item)=> <Product item={item} key={item.id} />)}
     </Container>
   )

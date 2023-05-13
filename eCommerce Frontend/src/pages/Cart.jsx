@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react'
 import { userRequest } from "../requestMethods"
 import { useNavigate } from "react-router"
 
-const stripe = process.env.REACT_APP_STRIPE_KEY
+const stripe = process.env.REACT_APP_TEST_KEY
 
 const Container = styled.div`
 
@@ -193,7 +193,7 @@ const Cart = () => {
             try {
                 const res = await userRequest.post("/checkout/payment",
                 {
-                    tokenId: stripeToken,
+                    tokenId: stripeToken.id,
                     amount: cart.total * 100,
                 })
                 history.push("/success", {data:res.data})
@@ -201,7 +201,7 @@ const Cart = () => {
                 console.log(error)
             }
         }
-        makeRequest()
+        stripeToken && cart.total >=1 && makeRequest()
     },[stripeToken, cart.total, history])
 
   return (

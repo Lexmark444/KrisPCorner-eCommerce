@@ -5,7 +5,7 @@ import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
 import Products from "../components/Products"
 import { mobile } from "../responsive"
-import { useLocation } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import { useState } from "react"
 
 
@@ -46,27 +46,32 @@ const ProductList = () => {
   const cat = (location.pathname.split("/")[2])
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState("newest")
+  const Navigate = useNavigate();
+
 
   const handleFilters = (e) =>{
+    
     const value = e.target.value;
+    
     setFilters({
       ...filters,
       [e.target.name]: value,
     })
+    Navigate(`/products/${value.toLowerCase()}`)
   };
 
-
+  const title = cat.toUpperCase().split("", 1) + cat.substring(1)
 
   return (
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Product Catalog</Title>
+      <Title>{title}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="type" onChange={handleFilters}>
-            <Option disabled>Category</Option>
+            <Option defaultValue={cat}>Category</Option>
             <Option>Cereal</Option>
             <Option>Chips</Option>
             <Option>Cookies</Option>
