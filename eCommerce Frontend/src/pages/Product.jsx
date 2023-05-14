@@ -7,8 +7,8 @@ import { Add, Remove } from "@mui/icons-material"
 import { mobile } from "../responsive"
 import { useLocation } from "react-router"
 import { useEffect, useState  } from "react"
-import { userRequest, publicRequest } from "../requestMethods"
-import { addProduct } from "../redux/cartRedux"
+import { userRequest } from "../requestMethods"
+import { addProduct } from "../redux/cartSlice"
 import { useDispatch } from "react-redux"
 
 

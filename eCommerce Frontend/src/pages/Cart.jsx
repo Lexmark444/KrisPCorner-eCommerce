@@ -196,13 +196,16 @@ const Cart = () => {
                     tokenId: stripeToken.id,
                     amount: cart.total * 100,
                 })
-                history.push("/success", {data:res.data})
+                history.push("/success", {
+                stripeData: res.data,
+                products: cart,
+            })
             } catch (error) {
                 console.log(error)
             }
         }
-        stripeToken && cart.total >=1 && makeRequest()
-    },[stripeToken, cart.total, history])
+        stripeToken && makeRequest()
+    },[stripeToken, cart, cart.total, history])
 
   return (
     <Container>

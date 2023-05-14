@@ -16,14 +16,4 @@ router.post("/payment", (req, res) => {
 })
 
 
-// const items = req.body // => [{ _id: '001', quantity: 3 }, ...]
-// const itemIds = items.map(item => item._id);
-// const foundProducts = await Product.find({ _id: { $in: itemIds } }) // => [{ _id, name, imageURL, price }, ...]
-
-// const total = items.reduce((runningTotal, item) => {
-//   const { price } = foundProducts.find(prod => prod._id === item._id)
-//   const totalItemPrice = price * item.quantity;
-//   return runningTotal + totalItemPrice 
-// }, 0)
-
 module.exports = router;

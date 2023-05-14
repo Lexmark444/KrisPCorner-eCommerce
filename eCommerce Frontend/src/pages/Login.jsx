@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import loginbackground from "../assets/images/loginbackground.jpg"
 import { mobile } from "../responsive"
+import { useState } from "react"
+import { login } from "../redux/apiCalls"
+import { useDispatch, useSelector } from "react-redux"
 
 const Container = styled.div`
   height: 100vh;
@@ -65,8 +68,18 @@ const Button = styled.button`
 
   &:hover {
     background-color: pink;
-  }  
+  }
+  
+  &:disabled{
+    cursor: not-allowed
+  }
 `
+
+const Error = styled.span`
+  color: red;
+
+`
+
 const LinkContainer = styled.div`
   width: 100%;
   display: flex;
@@ -86,16 +99,36 @@ const Link = styled.a`
 `
 
 const Login = () => {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const dispatch = useDispatch()
+  const { isFetching, error } = useSelector((state) => state.user)
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  }
+
+  
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
 
-          <Input placeholder="Username"/>
-          <Input placeholder="Password"/>
+          <Input 
+          placeholder="Username" 
+          onChange={(e)=>setUsername(e.target.value)}
+          />
+          <Input 
+          placeholder="Password"  
+          type="password"
+          onChange={(e)=>setPassword(e.target.value)}
+          />
           <ButtonContainer>
-            <Button>LOGIN</Button>
+            <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
+            {error && <Error>Either your Username or Password is incorrect...</Error>}
           </ButtonContainer>
           <LinkContainer>
             <Link>Register</Link>

@@ -80,20 +80,19 @@ const Product = ({item}) => {
     <Container>
         <Pacman />
         <Image src={item.img} />
-        
+        <Link to={`/product/${item._id}`}   onClick={() => {window.scroll(0, 0);}}>
         <Info>
             <Icon>
               <ShoppingCartOutlinedIcon/>
             </Icon>
             <Icon>
-                <Link to={`/product/${item._id}`}>
                 <SearchOutlinedIcon/>
-                </Link>
             </Icon>
             <Icon>
                 <FavoriteBorderOutlinedIcon />
             </Icon>
         </Info>
+        </Link>
     </Container>
   )
 }

@@ -70,8 +70,8 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select name="type" onChange={handleFilters}>
-            <Option defaultValue={cat}>Category</Option>
+          <Select name="type" onChange={handleFilters} defaultValue={title}>
+            <Option disabled>Category</Option>
             <Option>Cereal</Option>
             <Option>Chips</Option>
             <Option>Cookies</Option>
