@@ -10,6 +10,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import payimage from '../assets/images/payment.png'
 import { mobile } from "../responsive";
+import { useNavigate } from "react-router";
 
 
 const Container = styled.div`
@@ -67,9 +68,15 @@ const List = styled.ul`
     flex-wrap: wrap;
 
 `
-const ListItem = styled.li`
+const ListItem = styled.a`
     width: 50%;
     margin-bottom: 10px;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+    &:hover{
+        color: teal
+    }
 `
 const Right = styled.div`
     flex: 1;
@@ -88,6 +95,43 @@ const Payment = styled.img`
 
 
 const Footer = () => {
+    const navigate = useNavigate()
+
+    const routeHome = () => {
+        navigate("/")
+    }
+
+    const routeCart = () => {
+        navigate("/cart")
+    }
+
+    const routeCereal = () => {
+        navigate("/products/cereal")
+    }
+
+    const routeChips = () => {
+        navigate("/products/chips")
+    }
+
+    const routeCookies = () => {
+        navigate("/products/cookies")
+    }
+
+    const routeDesserts = () => {
+        navigate("/products/desserts")
+    }
+
+    const routeDrinks = () => {
+        navigate("/products/drinks")
+    }
+
+    const routeDev = () => {
+        navigate("/products/dev")
+    }
+
+    const routeTerms = () => {
+        navigate("/terms")
+    }
   return (
     <Container>
         <Left>
@@ -120,18 +164,18 @@ const Footer = () => {
         <Center>
             <Title>Useful Links</Title>
             <List>
-                <ListItem>Home</ListItem>
-                <ListItem>Cereal</ListItem>
-                <ListItem>Cart</ListItem>
-                <ListItem>Chips</ListItem>
+                <ListItem onClick={routeHome}>Home</ListItem>
+                <ListItem onClick={routeCereal}>Cereal</ListItem>
+                <ListItem onClick={routeCart}>Cart</ListItem>
+                <ListItem onClick={routeChips}>Chips</ListItem>
                 <ListItem>My Account</ListItem>
-                <ListItem>Cookies</ListItem>
+                <ListItem onClick={routeCookies}>Cookies</ListItem>
                 <ListItem>Wishlist</ListItem>
-                <ListItem>Desserts</ListItem>
+                <ListItem onClick={routeDesserts}>Desserts</ListItem>
                 <ListItem>About</ListItem>
-                <ListItem>Drinks</ListItem>
-                <ListItem>Terms</ListItem>
-                <ListItem>Dev Favorites</ListItem>
+                <ListItem onClick={routeDrinks}>Drinks</ListItem>
+                <ListItem onClick={routeTerms}>Terms</ListItem>
+                <ListItem onClick={routeDev}>Dev Favorites</ListItem>
             </List>
         </Center>
         <Right>

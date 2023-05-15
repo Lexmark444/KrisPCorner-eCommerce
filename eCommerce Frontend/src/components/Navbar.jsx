@@ -3,10 +3,15 @@ import styled from 'styled-components'
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import logoimage from '../assets/images/Krisp Corner.png'
 import {mobile} from "../responsive"
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+
+
+
 
 
 
@@ -27,10 +32,11 @@ const Left = styled.div`
     display: flex; 
     align-items: center;
 `
-const Language = styled.span`
+const GoHome = styled.span`
     font-size: 14px;
     cursor: pointer;
-    ${mobile({ display: "none" })}
+    ${mobile({ marginLeft: "10px" })}
+
 `
 const SearchContainer = styled.div`
     border: 1px solid lightgray;
@@ -39,7 +45,7 @@ const SearchContainer = styled.div`
     margin-left: 25px;
     padding: 5px;
     border-radius: 3px;
-    ${mobile({ marginLeft: "10px" })}
+    ${mobile({ display: "none" })}
 `
 const Input = styled.input`
     border: none;
@@ -81,12 +87,37 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
     const quantity = useSelector(state=>state.cart.quantity)
+    const user = useSelector((state) => state.user.currentUser);
+    const navigate = useNavigate(); 
+
+    const routeLogin = () =>{ 
+      navigate("/login");
+    }
+
+    const routeRegister = () =>{ 
+        navigate("/register");
+    }
+
+    const routeHome = () =>{ 
+        navigate("/");
+      }
+
+    // const [isVisible, setIsVisible] = useState(false)
+
+    // const signOutOnClick = () => {
+    //   signOut(auth)
+    //   location.reload();
+    // }
+    // LOG OUT function
+    // upon user, hide register and sign in, show `Welcome ${user}` and sign out
 
   return (
     <Container>
       <Wrapper>
         <Left>
-            <Language>EN</Language>
+            <GoHome>
+                <HomeRoundedIcon onClick={routeHome} />
+            </GoHome>
             <SearchContainer>
                 <Input/> 
                 <SearchIcon style={{color:"gray", fontSize:16}}/>
@@ -94,9 +125,18 @@ const Navbar = () => {
         </Left>
         <Center><Logo><Image src={logoimage} alt='logo' width={250}/></Logo></Center>
         <Right>
-            
-            <MenuItem>REGISTER</MenuItem>
-            <MenuItem>SIGN IN</MenuItem>
+
+            { !user ? 
+            <>
+            <MenuItem onClick={routeRegister}>REGISTER</MenuItem>
+            <MenuItem onClick={routeLogin}>SIGN IN</MenuItem>
+            </>
+            :
+            <>
+            <MenuItem>Welcome {user.username}!</MenuItem>
+            <MenuItem onClick={""}>SIGN OUT</MenuItem>
+            </>
+            }
             <Link to="/cart">
             <MenuItem>    
                 <Badge badgeContent={quantity} color="primary">

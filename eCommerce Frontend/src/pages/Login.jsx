@@ -4,6 +4,7 @@ import { mobile } from "../responsive"
 import { useState } from "react"
 import { login } from "../redux/apiCalls"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router"
 
 const Container = styled.div`
   height: 100vh;
@@ -102,14 +103,18 @@ const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { isFetching, error } = useSelector((state) => state.user)
 
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { username, password });
   }
-
   
+  const routeRegister = () =>{ 
+    navigate("/register");
+  }
+
 
   return (
     <Container>
@@ -131,8 +136,8 @@ const Login = () => {
             {error && <Error>Either your Username or Password is incorrect...</Error>}
           </ButtonContainer>
           <LinkContainer>
-            <Link>Register</Link>
-            <Link>Forgot Password?</Link>
+            <Link onClick={routeRegister}>Register</Link>
+            <Link onClick={()=>alert("That SUCKS!")}>Forgot Password?</Link>
           </LinkContainer>
         </Form>
       </Wrapper>

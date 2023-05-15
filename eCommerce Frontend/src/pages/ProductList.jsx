@@ -60,7 +60,14 @@ const ProductList = () => {
     Navigate(`/products/${value.toLowerCase()}`)
   };
 
-  const title = cat.toUpperCase().split("", 1) + cat.substring(1)
+  var title = cat[0].toUpperCase() + cat.substring(1)
+  title = title.replace("%20", " ");
+  title = title.split(" ");
+  for (let i = 0; i < title.length; i++) {
+    title[i] = title[i][0].toUpperCase() + title[i].substring(1);
+}
+  title = title.join(" ");
+
 
   return (
     <Container>

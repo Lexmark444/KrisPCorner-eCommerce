@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Send } from '@mui/icons-material'
 import { mobile } from "../responsive"
+import { useState } from "react"
 
 const Container = styled.div`
   height: 60vh;
@@ -39,16 +40,28 @@ const Button = styled.button`
   border: none;
   background-color: teal;
   color: white;
+  cursor: pointer;
 `
 
 const Newsletter = () => {
+
+  const [value, setValue] = useState("");
+
+  const onInput = (e) => setValue(e.target.value);
+
+  const onClear = () => {
+    setValue("");
+    alert("You've subscribed!")
+  }
+
+
   return (
     <Container>
       <Title>Newsletter</Title>
       <Desc>Get updated on your favorite products!</Desc>
       <InputContainer>
-        <Input placeholder="Your email" />
-        <Button>
+        <Input value={value} onInput={onInput} placeholder="Your email" />
+        <Button onClick={ onClear }>
           <Send />
         </Button>
       </InputContainer>

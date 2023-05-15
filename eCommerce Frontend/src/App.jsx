@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import Success from "./pages/Success"
+import Terms from "./pages/Terms";
 
 
 import { 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/product/:id"  element={<Product />} />
         <Route path="/cart"  element={<Cart />} />
         <Route path="/success"  element={<Success />} />
+        <Route path="/terms"  element={<Terms />} />
         <Route path="/login"  element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/register"  element={user ? <Navigate to="/" /> : <Register />} />
       </Routes>
