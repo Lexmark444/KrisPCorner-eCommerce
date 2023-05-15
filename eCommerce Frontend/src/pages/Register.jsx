@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import registerbg from "../assets/images/registerbg.jpg"
 import { mobile } from "../responsive"
+import Navbar from "../components/Navbar"
 
 const Container = styled.div`
   height: 100vh;
@@ -71,6 +72,8 @@ const Button = styled.button`
 
 const Register = () => {
   return (
+    <div>
+      <Navbar />
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
@@ -89,6 +92,7 @@ const Register = () => {
         </Form>
       </Wrapper>
     </Container>
+    </div>
   )
 }
 

@@ -5,6 +5,7 @@ import { useState } from "react"
 import { login } from "../redux/apiCalls"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
+import Navbar from "../components/Navbar"
 
 const Container = styled.div`
   height: 100vh;
@@ -117,6 +118,8 @@ const Login = () => {
 
 
   return (
+    <div>
+      <Navbar />
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
@@ -142,6 +145,7 @@ const Login = () => {
         </Form>
       </Wrapper>
     </Container>
+    </div>
   )
 }
 
