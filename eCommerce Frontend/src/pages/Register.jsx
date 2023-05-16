@@ -2,6 +2,8 @@ import styled from "styled-components"
 import registerbg from "../assets/images/registerbg.jpg"
 import { mobile } from "../responsive"
 import Navbar from "../components/Navbar"
+import { useNavigate } from "react-router"
+import { useState } from "react"
 
 const Container = styled.div`
   height: 100vh;
@@ -71,23 +73,63 @@ const Button = styled.button`
 `
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const registerUser = async (e) => {
+    e.preventDefault()
+
+    const response = await fetch("http://localhost:5000/api/auth/register",{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username, email, password
+      })
+    })
+    const data = await response.json()
+    
+    if (data){
+      alert("Congrats! You will be redirected to the login page!");
+      navigate('/login')
+    } else {
+      alert("Something went wrong!");
+    }
+    
+  }
+
   return (
     <div>
       <Navbar />
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
-        <Form>
+        <Form onSubmit={registerUser}>
           <Input placeholder="First Name"/>
           <Input placeholder="Last Name"/>
-          <Input placeholder="Email"/>
-          <Input placeholder="Username"/>
-          <Input placeholder="Password"/>
+          <Input 
+              value={email}
+              onChange={(e)=> setEmail(e.target.value)}
+              placeholder="Email"
+          />
+          <Input 
+            value={username} 
+            onChange={(e)=> setUsername(e.target.value)}
+            placeholder="Username"
+          />
+          <Input 
+            value={password} 
+            onChange={(e)=> setPassword(e.target.value)}
+            placeholder="Password"
+          />
           <Agreement>By creating an account I consent to the processing of my personal data in accordance
             with the <b>PRIVACY POLICY</b>
           </Agreement>
           <ButtonContainer>
-          <Button>SUBMIT</Button>
+          <Button type={'submit'} value={"Register"} onClick={registerUser}>SUBMIT</Button>
           </ButtonContainer>
         </Form>
       </Wrapper>

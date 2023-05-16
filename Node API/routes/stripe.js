@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const stripe = require('stripe')(process.env.STRIPE_KEY_TEST)
+const stripe = require('stripe')(process.env.REACT_APP_KEY_TEST)
 
 router.post("/payment", (req, res) => {
     stripe.charges.create({

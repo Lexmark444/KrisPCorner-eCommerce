@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { PURGE } from "redux-persist";
 
 const userSlice = createSlice({
     name:"user",
@@ -20,6 +21,11 @@ const userSlice = createSlice({
             state.error = true
 
         },
+        extraReducers: (builder) => {
+            builder.addCase(PURGE, (state) => {
+                userSlice.removeAll(state);
+            });
+        }
     }
 })
 

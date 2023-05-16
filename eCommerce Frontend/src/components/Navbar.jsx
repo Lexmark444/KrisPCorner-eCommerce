@@ -8,6 +8,7 @@ import logoimage from '../assets/images/Krisp Corner.png'
 import {mobile} from "../responsive"
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { persistor } from '../redux/store';
 
 
 
@@ -77,6 +78,11 @@ const Right = styled.div`
     justify-content: flex-end;
     ${mobile({ flex: "2", justifyContent: "center" })}
 `
+const Greeting = styled.div`
+    font-size: 14px;
+    margin-left: 25px;
+    ${mobile({ fontSize: "9px", marginLeft: "10px" })}
+`
 
 const MenuItem = styled.div`
     font-size: 14px;
@@ -102,14 +108,12 @@ const Navbar = () => {
         navigate("/");
       }
 
-    // const [isVisible, setIsVisible] = useState(false)
 
-    // const signOutOnClick = () => {
-    //   signOut(auth)
-    //   location.reload();
-    // }
-    // LOG OUT function
-    // upon user, hide register and sign in, show `Welcome ${user}` and sign out
+    const signOut = () => {
+        persistor.purge()
+        window.location.reload()
+    }
+
 
   return (
     <Container>
@@ -133,8 +137,8 @@ const Navbar = () => {
             </>
             :
             <>
-            <MenuItem>Welcome {user.username}!</MenuItem>
-            <MenuItem onClick={""}>SIGN OUT</MenuItem>
+            <Greeting>Welcome {user.username}!</Greeting>
+            <MenuItem onClick={signOut}>SIGN OUT</MenuItem>
             </>
             }
             <Link to="/cart">
