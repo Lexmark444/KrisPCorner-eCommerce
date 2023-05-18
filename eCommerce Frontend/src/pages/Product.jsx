@@ -25,7 +25,6 @@ const Wrapper = styled.div`
 
 const ImgContainer = styled.div`
     flex: 1;
-    
 `
 
 const Image = styled.img`
@@ -84,7 +83,7 @@ const FilterSizeOption = styled.option`
     
 `
 const AddContainer = styled.div`
-    width: 31%;
+    width: 37%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -117,6 +116,7 @@ const Button = styled.button`
     cursor: pointer;
     font-weight: 500;
     font-size: medium;
+    margin-left: 10px;
 
     &:hover{
         background-color: #f8f4f4;
@@ -181,12 +181,11 @@ const Product = () => {
                 </FilterContainer>
                 <AddContainer>
                     <AmountContainer>
-                        <Remove onClick={()=> handleQuantity("decr")}/>
+                        <Remove onClick={()=> handleQuantity("decr")} style={{cursor: "pointer"}}/>
                         <Amount>{quantity}</Amount>
-                        <Add onClick={()=> handleQuantity("incr")}/>
+                        <Add onClick={()=> handleQuantity("incr")} style={{cursor: "pointer"}}/>
                     </AmountContainer>
                     <Button onClick={handleClick}>ADD TO CART</Button>
-
                 </AddContainer>
             </InfoContainer>
         </Wrapper>

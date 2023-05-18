@@ -8,7 +8,6 @@ import { mobile } from "../responsive"
 import { useSelector } from "react-redux"
 import StripeCheckout from 'react-stripe-checkout'
 import { useState, useEffect } from 'react'
-import { userRequest } from "../requestMethods"
 import { useNavigate } from "react-router"
 
 const stripe = process.env.REACT_APP_TEST_KEY
@@ -118,6 +117,7 @@ const ProductAmountContainer = styled.div`
 `
 
 const ProductAmount = styled.div`
+    padding: 10px;
     margin: 5px;
     font-size: 24px;
     ${mobile({ margin: "5px 15px" })}
@@ -182,30 +182,41 @@ const Button = styled.div`
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
     const [stripeToken, setStripeToken] = useState(null);
-    const history = useNavigate()
+    const navigate = useNavigate()
 
     const onToken = (token) =>{
         setStripeToken(token)
     };
 
+
     useEffect(()=>{
+        const total = cart.total.toFixed(2) * 100
         const makeRequest = async () =>{
             try {
-                const res = await userRequest.post("/checkout/payment",
+                const res = await fetch("http://localhost:5000/api/checkout/payment",{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
                 {
                     tokenId: stripeToken.id,
-                    amount: cart.total * 100,
-                })
-                history.push("/success", {
+                    amount: total,
+                }),
+            })
+                navigate("/success", 
+                {
                 stripeData: res.data,
                 products: cart,
-            })
+                }
+            )
             } catch (error) {
                 console.log(error)
             }
+        
         }
         stripeToken && makeRequest()
-    },[stripeToken, cart, cart.total, history])
+    },[stripeToken, cart, cart.total, navigate])
 
   return (
     <Container>
@@ -232,7 +243,7 @@ const Cart = () => {
                     {cart.products.map(product=>(
                     <Product>
                         <ProductDetail>
-                            <Image src={product.img} />
+                            <Image src={product.img} onClick={() => window.location.replace(`/product/${product._id}`)} />
                             <Details>
                                 <ProductName><b>Product:</b> {product.title}</ProductName>
                                 <ProductId><b>ID:</b> {product._id}</ProductId>
@@ -241,11 +252,11 @@ const Cart = () => {
                         </ProductDetail>
                         <PriceDetail>
                             <ProductAmountContainer>
-                                <Remove />
+                                <Remove style={{cursor:"pointer"}} />
                                 <ProductAmount>{product.quantity}</ProductAmount>
-                                <Add />
+                                <Add style={{cursor:"pointer"}} />
                             </ProductAmountContainer>
-                            <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
+                            <ProductPrice>$ {product.price}</ProductPrice>
                         </PriceDetail>
                     </Product>
                     ))}
@@ -256,7 +267,7 @@ const Cart = () => {
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                     <SummaryItem>
                         <SummaryItemText>Subtotal</SummaryItemText>
-                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                        <SummaryItemPrice>$ {cart.total.toFixed(2)}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -268,15 +279,15 @@ const Cart = () => {
                     </SummaryItem>
                     <SummaryItem type="total">
                         <SummaryItemText>Total</SummaryItemText>
-                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                        <SummaryItemPrice>$ {cart.total.toFixed(2)}</SummaryItemPrice>
                     </SummaryItem>
                     <StripeCheckout 
             name='KrisP Corner' 
             image={placeholder}
             billingAddress
             shippingAddress
-            description={`Your total is $${cart.total}`}
-            amount={cart.total*100}
+            description={`Your total is $${cart.total.toFixed(2)}`}
+            amount={cart.total.toFixed(2)*100}
             token={onToken}
             stripeKey={stripe}
             >
