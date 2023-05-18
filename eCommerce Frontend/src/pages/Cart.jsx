@@ -179,7 +179,7 @@ const Button = styled.div`
 
 
 
-const Cart = () => {
+const Cart = ({item}) => {
     const cart = useSelector((state) => state.cart);
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate()
