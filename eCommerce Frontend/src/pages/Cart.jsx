@@ -5,10 +5,11 @@ import Footer from "../components/Footer"
 import placeholder from "../assets/images/placeholder.png"
 import { Add, Remove } from "@mui/icons-material"
 import { mobile } from "../responsive"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import StripeCheckout from 'react-stripe-checkout'
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router"
+import { addOneProduct, clearCart, decreaseCart, getTotals, removeFromCart } from "../redux/cartSlice"
 
 const stripe = process.env.REACT_APP_TEST_KEY
 
@@ -98,7 +99,16 @@ const ProductName = styled.span`
 const ProductId = styled.span`
 
 `
-
+const RemoveAll = styled.button`
+    text-decoration: underline;
+    font-size: smaller;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    display: flex;
+    width: 20%;
+    color: grey;
+`
 
 const PriceDetail = styled.div`
     flex: 1;
@@ -172,18 +182,56 @@ const Button = styled.div`
     justify-content: center;
 
 `
+const ClearContainer = styled.div`
+    display: flex;
+    justify-content: start;
+    margin-left: 33px;
+    padding-top: 10px;
+`
+const ClearCart = styled.button`
+    width: auto;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    font-weight: 600;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+`
 
 
-
-
-const Cart = ({item}) => {
+const Cart = () => {
     const cart = useSelector((state) => state.cart);
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getTotals())
+    }, [cart, dispatch])
+
+    const handleRemoveFromCart = (item) => {
+        dispatch(removeFromCart(item))
+    }
+
+    const handleDecreaseCart = (item) => {
+        dispatch(decreaseCart(item))
+    }
+
+    const handleIncreaseCart = (item) => {
+        dispatch(addOneProduct(item))
+    }
+
+    const handleClearCart = () => {
+        dispatch(clearCart())
+    }
+
     const onToken = (token) =>{
         setStripeToken(token)
     };
-
 
     useEffect(()=>{
         const total = cart.total.toFixed(2) * 100
@@ -245,19 +293,23 @@ const Cart = ({item}) => {
                             <Details>
                                 <ProductName><b>Product:</b> {product.title}</ProductName>
                                 <ProductId><b>ID:</b> {product._id}</ProductId>
+                                <RemoveAll onClick={() => handleRemoveFromCart(product) }>Remove</RemoveAll>
                             </Details>
                         </ProductDetail>
                         <PriceDetail>
                             <ProductAmountContainer>
-                                <Remove style={{cursor: "pointer"}}/>
+                                <Remove style={{cursor: "pointer"}} onClick={ () => handleDecreaseCart(product)}/>
                                 <ProductAmount>{product.quantity}</ProductAmount>
-                                <Add style={{cursor: "pointer"}}/>
+                                <Add style={{cursor: "pointer"}} onClick={ () => handleIncreaseCart(product)}/>
                             </ProductAmountContainer>
-                            <ProductPrice>$ {product.price}</ProductPrice>
+                            <ProductPrice>$ {(product.price * product.quantity).toFixed(2)}</ProductPrice>
                         </PriceDetail>
                     </Product>
                     ))}
                     <Hr></Hr>
+                    <ClearContainer>
+                        <ClearCart onClick={()=> handleClearCart()}>Clear Cart</ClearCart>
+                    </ClearContainer>
                 </Info>
 
                 <Summary>

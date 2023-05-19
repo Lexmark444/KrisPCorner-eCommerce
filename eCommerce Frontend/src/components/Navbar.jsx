@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
@@ -6,9 +6,10 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import logoimage from '../assets/images/Krisp Corner.png'
 import {mobile} from "../responsive"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { persistor } from '../redux/store';
+import { getTotals } from '../redux/cartSlice';
 
 
 
@@ -92,9 +93,11 @@ const MenuItem = styled.div`
 `
 
 const Navbar = () => {
-    const quantity = useSelector(state=>state.cart.quantity)
+    const cart = useSelector((state) => state.cart)
+    const quantity = useSelector((state) => state.cart.quantity)
     const user = useSelector((state) => state.user.currentUser);
     const navigate = useNavigate(); 
+    const dispatch = useDispatch();
 
     const routeLogin = () =>{ 
       navigate("/login");
@@ -114,6 +117,9 @@ const Navbar = () => {
         window.location.reload()
     }
 
+    useEffect(() => {
+        dispatch(getTotals())
+    }, [cart, dispatch])
 
   return (
     <Container>

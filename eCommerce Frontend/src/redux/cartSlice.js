@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { PURGE } from "redux-persist";
+
 
 const cartSlice = createSlice({
     name:"cart",
@@ -11,37 +11,82 @@ const cartSlice = createSlice({
     reducers:{
         addProduct: (state, action)=> {
                 const itemIndex = state.products.findIndex(
-                    (item) => item.id === action.payload.id
+                    (product) => product._id === action.payload._id
                 )
                 if (itemIndex >= 0){
-                   const newQuantity = state.products[itemIndex].quantity += (action.payload.quantity)
-                   state.total = newQuantity * action.payload.price
+                   state.products[itemIndex].quantity += (action.payload.quantity)
+
                 } else {
-                    state.quantity += 1;
-                    state.products.push(action.payload);
-                    state.total = action.payload.quantity * action.payload.price
+                    const tempProduct = {...action.payload, quantity: action.payload.quantity}
+                    state.products.push(tempProduct);
                 }
                 
         },
-        removeFromCart(state, action) {
-            const nextCartItems = state.CartItems.filter(
-                (cartItem) => cartItem.id !== action.payload.id
+        addOneProduct: (state, action)=> {
+            const itemIndex = state.products.findIndex(
+                (product) => product._id === action.payload._id
             )
-            state.cartItems = nextCartItems
-            localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
+            if (itemIndex >= 0){
+               state.products[itemIndex].quantity += 1
+
+            } else {
+                const tempProduct = {...action.payload, quantity: 1}
+                state.products.push(tempProduct);
+            }
+            
+        },
+        removeFromCart(state, action) {
+            const nextCartItems = state.products.filter(
+                (product) => product._id !== action.payload._id
+            )
+            state.products = nextCartItems
+            localStorage.setItem("products", JSON.stringify(state.products))
         },
         decreaseCart(state, action){
+            const itemIndex = state.products.findIndex(
+                product => product._id === action.payload._id
+            )
 
-        }
+            if(state.products[itemIndex].quantity > 1){
+                state.products[itemIndex].quantity -= 1
 
+            } else if(state.products[itemIndex].quantity === 1){
+                const nextCartItems = state.products.filter(
+                    (product) => product._id !== action.payload._id
+                )
+                state.products = nextCartItems
+                localStorage.setItem("products", JSON.stringify(state.products))
+            }
+        },
+
+        clearCart(state, action){
+            state.products = []
+            localStorage.setItem("products", JSON.stringify(state.products))
+        },
+        getTotals(state, action){
+            let {total, quantity} = state.products.reduce(
+                (cartTotal, product) => {
+                const { price, quantity} = product;
+                const itemTotal = price * quantity;
+
+                cartTotal.total += itemTotal
+                cartTotal.quantity += quantity
+
+                return cartTotal
+            }, 
+            {
+                total: 0,
+                quantity: 0,
+            }
+            )
+
+            state.quantity = quantity
+            state.total = total
+        },
         
     },
-    // extraReducers: (builder) => {
-    //     builder.addCase(PURGE, () => {
-    //         return initialState;
-    //     });
-    // }
+
 })
 
-export const {addProduct} = cartSlice.actions
+export const {addProduct, addOneProduct, removeFromCart, decreaseCart, clearCart, getTotals} = cartSlice.actions
 export const cartReducer = cartSlice.reducer

@@ -8,8 +8,9 @@ import { mobile } from "../responsive"
 import { useLocation } from "react-router"
 import { useEffect, useState  } from "react"
 import { userRequest } from "../requestMethods"
-import { addProduct } from "../redux/cartSlice"
+import { addProduct, getTotals } from "../redux/cartSlice"
 import { useDispatch } from "react-redux"
+
 
 
 
@@ -101,7 +102,6 @@ const Product = () => {
     const id = (location.pathname.split("/")[2])
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)
-    const [size, setSize] = useState(null)
     const dispatch = useDispatch()
 
 
@@ -128,6 +128,7 @@ const Product = () => {
     const handleClick = ()=>{
         dispatch(addProduct({ ...product, quantity, price:product.price }))
     }
+
     
   return (
     <Container>
