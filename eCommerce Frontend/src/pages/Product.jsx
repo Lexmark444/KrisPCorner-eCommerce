@@ -8,7 +8,7 @@ import { mobile } from "../responsive"
 import { useLocation } from "react-router"
 import { useEffect, useState  } from "react"
 import { userRequest } from "../requestMethods"
-import { addProduct, getTotals } from "../redux/cartSlice"
+import { addProduct } from "../redux/cartSlice"
 import { useDispatch } from "react-redux"
 
 
