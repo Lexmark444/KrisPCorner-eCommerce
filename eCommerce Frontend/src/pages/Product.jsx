@@ -55,33 +55,6 @@ const Price = styled.span`
     font-size: 40px;
 `
 
-const FilterContainer = styled.div`
-    width: 50%;
-    margin: 30px 0px;
-    display: flex;
-    justify-content: space-between;
-`
-
-const Filter = styled.div`
-    display: flex;
-    align-items: center;
-`
-
-const FilterTitle = styled.span`
-    font-size: 25px;
-    font-weight: 200;
-`
-
-const FilterSize = styled.select`
-    margin-left: 10px;
-    padding: 5px;
-    border-radius: 3px;
-    font-size: large;
-`
-
-const FilterSizeOption = styled.option`
-    
-`
 const AddContainer = styled.div`
     width: 37%;
     display: flex;
@@ -153,8 +126,9 @@ const Product = () => {
     }
 
     const handleClick = ()=>{
-        dispatch(addProduct({ ...product, quantity, size, price:product.price*quantity }))
+        dispatch(addProduct({ ...product, quantity, price:product.price }))
     }
+    
   return (
     <Container>
         <Navbar />
@@ -169,16 +143,6 @@ const Product = () => {
                     {product.desc}
                 </Desc>
                 <Price>$ {product.price}</Price>
-                <FilterContainer>
-                    <Filter>
-                        <FilterTitle>Size</FilterTitle>
-                        <FilterSize onChange={(e)=> setSize(e.target.value)}>
-                            {product.size?.map((s) => (
-                            <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                            ))}
-                        </FilterSize>
-                    </Filter>
-                </FilterContainer>
                 <AddContainer>
                     <AmountContainer>
                         <Remove onClick={()=> handleQuantity("decr")} style={{cursor: "pointer"}}/>

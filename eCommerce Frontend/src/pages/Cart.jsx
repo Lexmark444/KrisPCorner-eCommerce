@@ -88,7 +88,7 @@ const Details = styled.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 `
 
 const ProductName = styled.span`
@@ -99,9 +99,6 @@ const ProductId = styled.span`
 
 `
 
-const ProductSize = styled.span`
-
-`
 
 const PriceDetail = styled.div`
     flex: 1;
@@ -183,7 +180,6 @@ const Cart = ({item}) => {
     const cart = useSelector((state) => state.cart);
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate()
-
     const onToken = (token) =>{
         setStripeToken(token)
     };
@@ -191,6 +187,8 @@ const Cart = ({item}) => {
 
     useEffect(()=>{
         const total = cart.total.toFixed(2) * 100
+
+
         const makeRequest = async () =>{
             try {
                 const res = await fetch("http://localhost:5000/api/checkout/payment",{
@@ -247,14 +245,13 @@ const Cart = ({item}) => {
                             <Details>
                                 <ProductName><b>Product:</b> {product.title}</ProductName>
                                 <ProductId><b>ID:</b> {product._id}</ProductId>
-                                <ProductSize><b>Size:</b> {product.size}</ProductSize>
                             </Details>
                         </ProductDetail>
                         <PriceDetail>
                             <ProductAmountContainer>
-                                <Remove style={{cursor:"pointer"}} />
+                                <Remove style={{cursor: "pointer"}}/>
                                 <ProductAmount>{product.quantity}</ProductAmount>
-                                <Add style={{cursor:"pointer"}} />
+                                <Add style={{cursor: "pointer"}}/>
                             </ProductAmountContainer>
                             <ProductPrice>$ {product.price}</ProductPrice>
                         </PriceDetail>
