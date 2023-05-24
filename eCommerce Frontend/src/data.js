@@ -10,30 +10,32 @@ import place from "./assets/images/placeholder.png"
 
 
 export const sliderItems = [
-    {
-        id: 1,
-        img: baby,
-        alt: " ",
-        title: "SATISFY YOUR SWEET TOOTH!",
-        desc: "START SKIPPING DINNER! GET 30% OFF ALL DESSERTS.",
-        bg: "fbf4ea",
-    },
-    {
-        id: 2,
-        img: tacowoman,
-        alt: " ",
-        title: "TAKE A BITE OUT OF LIFE!",
-        desc: "CRUNCHY NEW SNACKS ARE WAITING FOR YOU!",
-        bg: "fbf0f4",
-    },
-    {
-        id: 3,
-        img: staffpick,
-        alt: " ",
-        title: "CHECK OUT OUR STAFF PICKS!",
-        desc: "WE REALLY GO BEYOND JUST SNACKS",
-        bg: "F0F1F3",
-    },
+  {
+  id: 1,
+  img: tacowoman,
+  alt: " ",
+  title: "TAKE A BITE OUT OF LIFE!",
+  desc: "CRUNCHY NEW SNACKS ARE WAITING FOR YOU!",
+  bg: "fbf0f4",
+  },
+  {
+    id: 2,
+    img: staffpick,
+    alt: " ",
+    title: "CHECK OUT OUR STAFF PICKS!",
+    desc: "WE REALLY GO BEYOND JUST SNACKS",
+    bg: "F0F1F3",
+  },
+  {
+    id: 3,
+    img: baby,
+    alt: " ",
+    title: "SATISFY YOUR SWEET TOOTH!",
+    desc: "START SKIPPING DINNER! GET FREE SHIPPING ON ALL DESSERTS.",
+    bg: "fbf4ea",
+  },
+
+
 ]
 
 export const categories = [
@@ -68,39 +70,3 @@ export const categories = [
         cat: "drinks"
     },
 ]
-
-export const popularProducts = [
-  {
-    id:1,
-    img: place,
-  },
-  {
-    id:2,
-    img: place,
-  },
-  {
-    id:3,
-    img: place,
-  },
-  {
-    id:4,
-    img: place,
-  },
-  {
-    id:5,
-    img: place,
-  },
-  {
-    id:6,
-    img: place,
-  },
-  {
-    id:7,
-    img: place,
-  },
-  {
-    id:8,
-    img: place,
-  },
-
-  ]
