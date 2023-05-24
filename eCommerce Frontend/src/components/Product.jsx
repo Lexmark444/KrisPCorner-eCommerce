@@ -40,20 +40,22 @@ const Container = styled.div`
 const Pacman = styled.div`
     width: 0px;
     height: 0px;
-    border-right: 120px solid transparent;
-    border-top: 120px solid #F5DEB3;
-    border-left: 120px solid #F5DEB3;
-    border-bottom: 120px solid #F5DEB3;
-    border-top-left-radius: 120px;
-    border-top-right-radius: 120px;
-    border-bottom-left-radius: 120px;
-    border-bottom-right-radius: 120px;
+    border-right: 140px solid transparent;
+    border-top: 140px solid #F5DEB3;
+    border-left: 140px solid #F5DEB3;
+    border-bottom: 140px solid #F5DEB3;
+    border-top-left-radius: 140px;
+    border-top-right-radius: 140px;
+    border-bottom-left-radius: 140px;
+    border-bottom-right-radius: 140px;
     position: absolute;
 `
 const Image = styled.img`
-    height: 40%;
+    height: 66%;
+    max-width: 80%;
     z-index: 2;
     object-fit: contain;
+    border-radius: 3px;
 `
 
 const Icon = styled.div`

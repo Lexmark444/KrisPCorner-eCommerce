@@ -248,7 +248,7 @@ const Cart = () => {
 
         const makeRequest = async () =>{
             try {
-                const res = await fetch("http://localhost:5000/api/checkout/payment",{
+                const res = await fetch("https://krisp-corner-crud-node-api.onrender.com/api/checkout/payment",{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
