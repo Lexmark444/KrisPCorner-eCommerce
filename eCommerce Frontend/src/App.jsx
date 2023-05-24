@@ -15,6 +15,7 @@ import {
   Navigate
 } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Category from "./pages/Category";
 
 
 
@@ -24,6 +25,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/category" element={<Category />} />
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/product/:id"  element={<Product />} />
         <Route path="/cart"  element={<Cart />} />

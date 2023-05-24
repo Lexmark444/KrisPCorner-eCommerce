@@ -19,7 +19,7 @@ const Container = styled.div`
 const Announcement = () => {
   return (
     <Container>
-        Payment Works! So... you are just buying the concept of the items :P
+        Stripe Payment switched to Test Mode! Use test card (4242 4242 4242 4242) exp: 08/24 CVC: 123 
     </Container>
   )
 }

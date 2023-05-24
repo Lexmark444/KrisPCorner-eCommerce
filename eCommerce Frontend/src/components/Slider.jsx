@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { useState } from 'react';
 import { sliderItems } from '../data';
 import { mobile } from '../responsive';
+import { useNavigate } from 'react-router';
 
 
 
@@ -82,6 +83,7 @@ const Button = styled.button`
 `
 
 const Slider = () => {
+    const navigate = useNavigate()
     const [slideIndex, setSlideIndex] = useState(0);
     const handleClick = ( direction ) => {
 
@@ -91,6 +93,11 @@ const Slider = () => {
             setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)
         }
     };
+
+    const goShopping = () =>{
+        navigate('/category')
+    }
+
   return (
     <Container>
       <Arrow direction="left" onClick={()=>handleClick("left")}>
@@ -106,7 +113,7 @@ const Slider = () => {
             <InfoContainer>
                 <Title>{item.title}</Title>
                 <Desc>{item.desc}</Desc>
-                <Button >SHOP NOW</Button>
+                <Button onClick={goShopping}>SHOP NOW</Button>
             </InfoContainer>
         </Slide>
 

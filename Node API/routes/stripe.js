@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const stripe = require('stripe')(process.env.REACT_APP_KEY_TEST)
+const stripeReal = require('stripe')(process.env.REACT_APP_KEY)
 
 router.post("/payment", (req, res) => {
     stripe.charges.create({
@@ -12,8 +13,18 @@ router.post("/payment", (req, res) => {
         } else {
             res.status(200).json(stripeRes)
         }
+    }),
+    stripeReal.charges.create({
+        source: req.body.tokenId,
+        amount: req.body.amount,
+        currency: "usd",
+    }, ( stripeErr, stripeRes ) => {
+        if(stripeErr){
+            res.status(500).json(stripeErr)
+        } else {
+            res.status(200).json(stripeRes)
+        }
     })
 })
-
 
 module.exports = router;

@@ -15,7 +15,6 @@ const Container = styled.div`
     rgba(255,255,255,0.3)
     ),
     url(${registerbg});
-
   display: flex;
   align-items: center;
   justify-content: center;

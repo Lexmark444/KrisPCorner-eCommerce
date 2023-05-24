@@ -2,16 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import Navbar from '../components/Navbar'
 import { mobile } from '../responsive'
+import clouds from '../assets/images/walkingonclouds.jpg'
 
 const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 90vh;
-    overflow: auto;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+    rgba(255,255,255,0.3),
+    rgba(255,255,255,0.3)
+    ),
+    url(${clouds});
     background-color: whitesmoke;
-    ${mobile({ height: "95vh" })}
+    ${mobile({ fontSize: "medium" })}
 `
 const Rotate = styled.div`
     animation: loader 2.5s infinite;
@@ -36,11 +42,11 @@ const Policy = styled.div`
     font-weight: 700;
     animation: blinkingText 3s infinite;
     @keyframes blinkingText {
-    0%{     color: #ff0000;    }
-    49%{    color: #0011ff; }
+    1%{     color: teal;    }
+    49%{    color: blue; }
     60%{    color: transparent; }
     80%{    color:transparent;  }
-    100%{   color: #00ff15;    }
+    100%{   color: yellow;    }
     }
 
     rotate: 10turn;

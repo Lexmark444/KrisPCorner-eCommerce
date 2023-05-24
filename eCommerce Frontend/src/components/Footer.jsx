@@ -54,7 +54,7 @@ const IconContainer = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
-    ${mobile({ display: "none" })}
+    /* ${mobile({ display: "none" })} */
 `
 const Title = styled.h3`
     margin-bottom: 30px;
@@ -140,8 +140,7 @@ const Footer = () => {
                  and NodeJS along with Stripe API to process payments.
             </Desc>
             <Desc>
-            Public Service Warning: You will actually be charged
-                 for the items, but will not recieve them phyiscally. Feel free to donate 🙃
+             Enjoy this fun little website made for my Final Project at Coding Temple! 🙃
             </Desc>
             <SocialContainer>
                 <IconContainer color="E4405F">

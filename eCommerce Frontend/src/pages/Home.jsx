@@ -8,11 +8,12 @@ import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 
 const Home = () => {
+
   return (
     <div>
         <Navbar />
         <Announcement />
-        <Slider />
+        <Slider  />
         <Categories />
         <Products />
         <Newsletter />

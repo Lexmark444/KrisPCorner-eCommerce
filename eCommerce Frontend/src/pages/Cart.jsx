@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
-import placeholder from "../assets/images/placeholder.png"
+import placeholder from "../assets/images/cookies.jpg"
 import { Add, Remove } from "@mui/icons-material"
 import { mobile } from "../responsive"
 import { useDispatch, useSelector } from "react-redux"
@@ -12,6 +12,7 @@ import { useNavigate } from "react-router"
 import { addOneProduct, clearCart, decreaseCart, getTotals, removeFromCart } from "../redux/cartSlice"
 
 const stripe = process.env.REACT_APP_TEST_KEY
+// const stripeReal = process.env.REACT_APP_STRIPE_KEY
 
 const Container = styled.div`
 
@@ -67,6 +68,7 @@ const Info = styled.div`
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
+    ${mobile({ flexDirection: "column" })}
 `
 const ProductDetail = styled.div`
     flex: 2;
@@ -132,7 +134,7 @@ const ProductAmount = styled.div`
 const ProductPrice = styled.div`
     font-size: 30px;
     font-weight: 200;
-    ${mobile({ fontSize: "24px", fontWeight: "500" })}
+    ${mobile({ fontSize: "24px", fontWeight: "500" , marginBottom: "20px" })}
 `
 
 const Hr = styled.hr`
@@ -146,8 +148,9 @@ const Summary = styled.div`
     flex: 1;
     border: 0.5px solid lightgray;
     border-radius: 3px;
-    padding: 20px 20px 35px;
+    padding: 20px;
     height: 50vh;
+    padding-bottom: 0px;
     ${mobile({ borderRadius: "10px", marginTop: "10px" })}
 `
 const SummaryTitle = styled.h1`
@@ -171,7 +174,7 @@ const SummaryItemPrice = styled.span`
 `
 
 const Button = styled.div`
-    width: 100%;
+    width: 92%;
     padding: 13px;
     background-color: black;
     color: white;
@@ -180,13 +183,14 @@ const Button = styled.div`
     cursor: pointer;
     display: flex;
     justify-content: center;
-
+    ${mobile({ marginBottom: "15px" })}
 `
 const ClearContainer = styled.div`
     display: flex;
     justify-content: start;
     margin-left: 33px;
     padding-top: 10px;
+    ${mobile({ justifyContent: "center", marginLeft: "0" })}
 `
 const ClearCart = styled.button`
     width: auto;
@@ -199,6 +203,7 @@ const ClearCart = styled.button`
     cursor: pointer;
     display: flex;
     justify-content: center;
+    ${mobile({ width: "75%"})}
 
 `
 
@@ -208,6 +213,10 @@ const Cart = () => {
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const goShopping = () =>{
+        navigate('/category')
+    }
 
     useEffect(() => {
         dispatch(getTotals())
@@ -272,16 +281,27 @@ const Cart = () => {
             <Title>YOUR CART</Title>
             <Top>
 
-                <TopButton>CONTINUE SHOPPING</TopButton>
+                <TopButton onClick={goShopping}>CONTINUE SHOPPING</TopButton>
                 <TopTextContainer>
                     <TopText>
                         Shopping Bag ({cart.quantity})    
                     </TopText>
                     <TopText>
-                        Your Wishlist (0)
+                        Delicious Items ({cart.quantity})
                     </TopText>
                 </TopTextContainer>
+                <StripeCheckout 
+                        name='KrisP Corner' 
+                        image={placeholder}
+                        billingAddress
+                        shippingAddress
+                        description={`Your total is $${cart.total.toFixed(2)}`}
+                        amount={cart.total.toFixed(2)*100}
+                        token={onToken}
+                        stripeKey={stripe}
+                    >
                 <TopButton type="filled">CHECKOUT NOW</TopButton>
+                </StripeCheckout>
             </Top>
             <Bottom>
 
@@ -331,17 +351,17 @@ const Cart = () => {
                         <SummaryItemPrice>$ {cart.total.toFixed(2)}</SummaryItemPrice>
                     </SummaryItem>
                     <StripeCheckout 
-            name='KrisP Corner' 
-            image={placeholder}
-            billingAddress
-            shippingAddress
-            description={`Your total is $${cart.total.toFixed(2)}`}
-            amount={cart.total.toFixed(2)*100}
-            token={onToken}
-            stripeKey={stripe}
-            >
-            <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+                        name='KrisP Corner' 
+                        image={placeholder}
+                        billingAddress
+                        shippingAddress
+                        description={`Your total is $${cart.total.toFixed(2)}`}
+                        amount={cart.total.toFixed(2)*100}
+                        token={onToken}
+                        stripeKey={stripe}
+                    >   
+                        <Button>CHECKOUT NOW</Button>
+                    </StripeCheckout>
                 </Summary>
             </Bottom>
         </Wrapper>

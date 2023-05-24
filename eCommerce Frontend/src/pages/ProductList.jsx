@@ -42,8 +42,8 @@ const Option = styled.option`
 
 
 const ProductList = () => {
-  const location = useLocation();
-  const cat = (location.pathname.split("/")[2])
+  const locate = useLocation();
+  const cat = (locate.pathname.split("/")[2])
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState("newest")
   const Navigate = useNavigate();
@@ -58,6 +58,7 @@ const ProductList = () => {
       [e.target.name]: value,
     })
     Navigate(`/products/${value.toLowerCase()}`)
+    window.location.reload()
   };
 
   var title = cat[0].toUpperCase() + cat.substring(1)
