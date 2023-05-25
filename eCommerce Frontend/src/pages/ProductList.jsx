@@ -5,7 +5,9 @@ import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
 import Products from "../components/Products"
 import { mobile } from "../responsive"
-import { useLocation, useNavigate } from "react-router"
+import { useLocation, 
+  // useNavigate 
+} from "react-router"
 import { useState } from "react"
 
 
@@ -46,7 +48,7 @@ const ProductList = () => {
   const cat = (locate.pathname.split("/")[2])
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState("newest")
-  const Navigate = useNavigate();
+  // const Navigate = useNavigate();
 
 
   const handleFilters = (e) =>{
