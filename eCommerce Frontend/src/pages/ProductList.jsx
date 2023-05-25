@@ -57,7 +57,7 @@ const ProductList = () => {
       ...filters,
       [e.target.name]: value,
     })
-    Navigate(`krispcorner.netlify.app/products/${value.toLowerCase()}`)
+    window.location.replace(`https://krispcorner.netlify.app/products/${value.toLowerCase()}`)
     window.location.reload()
   };
 
