@@ -125,7 +125,7 @@ const Footer = () => {
     }
 
     const routeDev = () => {
-        navigate("/products/dev")
+        navigate("/products/dev%20favorites")
     }
 
     const routeTerms = () => {
