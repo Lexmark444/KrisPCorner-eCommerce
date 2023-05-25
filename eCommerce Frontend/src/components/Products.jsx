@@ -4,10 +4,11 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 const Container = styled.div`
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: rgb(240,241,243);
 
 `
 
@@ -57,7 +58,7 @@ const Products = ({cat, filters, sort}) => {
       {cat 
       ? filteredProducts.map((item)=> <Product item={item} key={item.id} />) 
       : products
-        .slice(0, 8)
+        .slice(0, 45)
         .map((item)=> <Product item={item} key={item.id} />)}
     </Container>
   )

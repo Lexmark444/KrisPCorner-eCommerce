@@ -11,12 +11,12 @@ import place from "./assets/images/placeholder.png"
 
 export const sliderItems = [
   {
-  id: 1,
-  img: tacowoman,
-  alt: " ",
-  title: "TAKE A BITE OUT OF LIFE!",
-  desc: "CRUNCHY NEW SNACKS ARE WAITING FOR YOU!",
-  bg: "fbf0f4",
+    id: 1,
+    img: baby,
+    alt: " ",
+    title: "SATISFY YOUR SWEET TOOTH!",
+    desc: "START SKIPPING DINNER! GET FREE SHIPPING ON ALL DESSERTS.",
+    bg: "fbf4ea",
   },
   {
     id: 2,
@@ -27,12 +27,12 @@ export const sliderItems = [
     bg: "F0F1F3",
   },
   {
-    id: 3,
-    img: baby,
-    alt: " ",
-    title: "SATISFY YOUR SWEET TOOTH!",
-    desc: "START SKIPPING DINNER! GET FREE SHIPPING ON ALL DESSERTS.",
-    bg: "fbf4ea",
+  id: 3,
+  img: tacowoman,
+  alt: " ",
+  title: "TAKE A BITE OUT OF LIFE!",
+  desc: "CRUNCHY NEW SNACKS ARE WAITING FOR YOU!",
+  bg: "fbf0f4",
   },
 
 
