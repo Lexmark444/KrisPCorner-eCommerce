@@ -6,7 +6,6 @@ import desserts from "./assets/images/dessert.jpg"
 import chips from "./assets/images/chips.jpg"
 import cereal from "./assets/images/cereal.jpg"
 import cookies from "./assets/images/cookies.jpg"
-import place from "./assets/images/placeholder.png"
 
 
 export const sliderItems = [
