@@ -41,8 +41,8 @@ export const categories = [
     {
         id: 1,
         img: desserts,
-        title: "Dessert",
-        cat: "dessert"
+        title: "Desserts",
+        cat: "desserts"
     },
     {
         id: 2,

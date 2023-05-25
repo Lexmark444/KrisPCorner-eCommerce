@@ -1,0 +1,46 @@
+/products/cereal/products/cereal /products/cereal
+/products/chips/products/cereal /products/cereal
+/products/cookies/products/cereal /products/cereal
+/products/desserts/products/cereal /products/cereal
+/products/drinks/products/cereal /products/cereal
+/products/dev%20favorites/products/cereal /products/cereal
+
+/products/cereal/products/chips /products/chips
+/products/chips/products/chips /products/chips
+/products/cookies/products/chips /products/chips
+/products/desserts/products/chips /products/chips
+/products/drinks/products/chips /products/chips
+/products/dev%20favorites/products/chips /products/chips
+
+/products/cereal/products/cookies /products/cookies
+/products/chips/products/cookies /products/cookies
+/products/cookies/products/cookies /products/cookies
+/products/desserts/products/cookies /products/cookies
+/products/drinks/products/cookies /products/cookies
+/products/dev%20favorites/products/cookies /products/cookies
+
+/products/cereal/products/desserts /products/desserts
+/products/chips/products/desserts /products/desserts
+/products/cookies/products/desserts /products/desserts
+/products/desserts/products/desserts /products/desserts
+/products/drinks/products/desserts /products/desserts
+/products/dev%20favorites/products/desserts /products/desserts
+
+/products/dessert /products/desserts
+
+/products/cereal/products/drinks /products/drinks
+/products/chips/products/drinks /products/drinks
+/products/cookies/products/drinks /products/drinks
+/products/desserts/products/drinks /products/drinks
+/products/drinks/products/drinks /products/drinks
+/products/dev%20favorites/products/drinks /products/drinks
+
+/products/cereal/products/dev%20favorites /products/dev%20favorites
+/products/chips/products/dev%20favorites /products/dev%20favorites
+/products/cookies/products/dev%20favorites /products/dev%20favorites
+/products/desserts/products/dev%20favorites /products/dev%20favorites
+/products/drinks/products/dev%20favorites /products/dev%20favorites
+/products/dev%20favorites/products/dev%20favorites /products/dev%20favorites
+
+
+/* /index.html 200
