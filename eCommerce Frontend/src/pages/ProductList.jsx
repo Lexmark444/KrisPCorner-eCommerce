@@ -5,9 +5,7 @@ import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
 import Products from "../components/Products"
 import { mobile } from "../responsive"
-import { useLocation, 
-  // useNavigate 
-} from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import { useState } from "react"
 
 
@@ -48,7 +46,7 @@ const ProductList = () => {
   const cat = (locate.pathname.split("/")[2])
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState("newest")
-  // const Navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   const handleFilters = (e) =>{
@@ -59,7 +57,7 @@ const ProductList = () => {
       ...filters,
       [e.target.name]: value,
     })
-    window.location.replace(`https://krispcorner.netlify.app/products/${value.toLowerCase()}`)
+    navigate(`/products/${value.toLowerCase()}`)
     window.location.reload()
   };
 
